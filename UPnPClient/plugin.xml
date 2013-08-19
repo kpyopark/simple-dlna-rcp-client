@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="upnpclient.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="Perspective"
+            class="upnpclient.Perspective"
+            id="UPnPClient.perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="upnpclient.view.DeviceList"
+            id="UPnPClient.view.DeviceList"
+            name="DeviceList">
+      </view>
+      <view
+            class="upnpclient.view.DetailInfo"
+            id="UPnPClient.view.DetailInfo"
+            name="Specific Information on this class."
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <view
+               standalone="true"
+               minimized="false"
+               relative="org.eclipse.ui.editorss"
+               relationship="left"
+               id="UPnPClient.view.DeviceList">
+         </view>
+         <view
+               id="UPnPClient.view.DetailInfo"
+               minimized="false"
+               relationship="right"
+               relative="org.eclipse.ui.editorss"
+               standalone="true">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               label="File">
+            <command
+                  commandId="org.eclipse.ui.file.exit"
+                  label="Exit">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="UPnPClient.menus.controlPointMenu"
+               label="Control Point"
+               mnemonic="M">
+            <command
+                  commandId="UPnPClient.commands.cpstart"
+                  id="UPnPClient.menus.startControlPoint"
+                  label="Start ControlPoint"
+                  mnemonic="S">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="UPnPClient.toolbars.sampleToolbar">
+            <command
+                  commandId="UPnPClient.commands.sampleCommand"
+                  icon="icons/sample.gif"
+                  id="UPnPClient.toolbars.sampleCommand"
+                  tooltip="Say hello world">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="UPnPClient.commands.category"
+            name="Device command">
+      </category>
+      <command
+            categoryId="UPnPClient.commands.category"
+            id="UPnPClient.commands.cpstart"
+            name="control point start">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="upnpclient.handlers.ControlPointStart"
+            commandId="UPnPClient.commands.cpstart">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="UPnPClient.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+6">
+      </key>
+   </extension>
+
+</plugin>
